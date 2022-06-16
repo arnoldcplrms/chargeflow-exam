@@ -1,0 +1,18 @@
+service: chargeflow
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  api:
+    handler: microservices/checkouts/handler.handler
+    events:
+      - http:
+          path: /checkouts/{any+}
+          method: get
+          cors: true

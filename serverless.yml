@@ -8,6 +8,10 @@ provider:
   name: aws
   runtime: nodejs14.x
 
+custom:
+  serverless-offline:
+    useChildProcesses: true
+
 functions:
   api:
     handler: microservices/products/handler.handler
@@ -16,5 +20,15 @@ functions:
           path: /products/{any+}
           method: get
           cors: true
-
-      
+      - http:
+          path: /products/{any+}
+          method: post
+          cors: true
+      - http:
+          path: /customer/{any+}
+          method: get
+          cors: true
+      - http:
+          path: /customer/{any+}
+          method: post
+          cors: true

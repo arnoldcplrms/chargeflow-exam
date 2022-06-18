@@ -1,0 +1,27 @@
+service: chargeflow-microservice-emails
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+
+functions:
+  checkoutEmailQueue:
+    handler: microservices/emails/handler.emailHandler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - EmailQueue
+              - Arn
+
+resources:
+  Resources:
+    EmailQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "EmailQueue"

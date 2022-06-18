@@ -5,6 +5,7 @@ require('dotenv/config')
 const mongoose = require('mongoose')
 const db = mongoose.connection
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, () => {
   console.log('Connection successfull')
@@ -18,6 +19,7 @@ db.once('open', () => {
 })
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app
   .use('/products', require('./routers/productsRouter'))

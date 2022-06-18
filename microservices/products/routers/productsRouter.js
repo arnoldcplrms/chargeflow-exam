@@ -20,4 +20,12 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:productId', async (req, res) => {
+  try {
+    res.json(await fetchProducts(req.params.productId))
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
 module.exports = router

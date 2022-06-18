@@ -1,3 +1,12 @@
+#!/usr/bin/env sh
+
+set -e
+
+stage=$1
+
+export $(cat .env | grep -v ^# | xargs)
+
+node --max-old-space-size=4096 ./node_modules/serverless/bin/serverless deploy --verbose
 #!/usr/bin/env bash
 
 set +e
@@ -43,6 +52,7 @@ if [ "$service" == "emails" ]; then
 fi
 
 
+
 if [ "$(uname)" == "Darwin" ]; then
   export $(cat .env | grep -v ^# | xargs)
 else
@@ -51,7 +61,7 @@ fi
 
 
 
-node  --max-old-space-size=4096 node_modules/serverless/bin/serverless.js offline start --noAuth 
+node node_modules/serverless/bin/serverless.js deploy --verbose
 exit
 
 

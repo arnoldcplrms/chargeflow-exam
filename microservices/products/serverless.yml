@@ -1,4 +1,4 @@
-service: chargeflow
+service: chargeflow-microservice-products
 frameworkVersion: '3'
 
 plugins:
@@ -7,17 +7,18 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
-
-custom:
-  serverless-offline:
-    useChildProcesses: true
+  region: ap-southeast-1
 
 functions:
-  api:
+  productsApi:
     handler: microservices/products/handler.handler
     events:
       - http:
           path: /products/{any+}
+          method: get
+          cors: true
+      - http:
+          path: /products
           method: get
           cors: true
       - http:
@@ -26,6 +27,10 @@ functions:
           cors: true
       - http:
           path: /customer/{any+}
+          method: get
+          cors: true
+      - http:
+          path: /customer
           method: get
           cors: true
       - http:

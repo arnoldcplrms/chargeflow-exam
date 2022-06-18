@@ -1,23 +1,24 @@
-const serverless = require("serverless-http");
-const express = require("express");
-const app = express();
+const serverless = require('serverless-http')
+const express = require('express')
+const app = express()
+require('dotenv/config')
+const mongoose = require('mongoose')
+const db = mongoose.connection
+const bodyParser = require('body-parser')
 
-app.get("/", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello from checkouts!",
-  });
-});
+mongoose.connect(process.env.MONGODB_CONNECTION_URL, () => {
+  console.log('Connection successfull')
+})
 
-app.get("/checkouts", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello from /checkouts",
-  });
-});
+db.once('open', () => {
+  console.log('Connected to Server')
+}).on('error', (err) => {
+  console.log('CONNECTION FAILED!')
+  console.log(err)
+})
 
-app.get("/checkouts/:id", (req, res, next) => {
-  return res.status(200).json({
-    message: req.params.id,
-  });
-});
+app.use(bodyParser.json())
 
-module.exports.handler = serverless(app);
+app.use('/checkouts', require('./routers/checkoutsRouter'))
+
+exports.handler = serverless(app)

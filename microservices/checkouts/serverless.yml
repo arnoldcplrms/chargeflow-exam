@@ -1,4 +1,4 @@
-service: chargeflow
+service: chargeflow-microservice-products
 frameworkVersion: '3'
 
 plugins:
@@ -7,12 +7,21 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
+  region: ap-southeast-1
 
 functions:
-  api:
+  checkoutsApi:
     handler: microservices/checkouts/handler.handler
     events:
       - http:
           path: /checkouts/{any+}
           method: get
+          cors: true
+      - http:
+          path: /checkouts/{any+}
+          method: post
+          cors: true
+      - http:
+          path: /checkouts/{any+}
+          method: put
           cors: true

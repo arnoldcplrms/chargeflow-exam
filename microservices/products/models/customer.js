@@ -9,6 +9,10 @@ const Customer = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
 })
 
 exports.Customer = mongoose.model('Customer', Customer)

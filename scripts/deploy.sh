@@ -1,14 +1,4 @@
 #!/usr/bin/env sh
-
-set -e
-
-stage=$1
-
-export $(cat .env | grep -v ^# | xargs)
-
-node --max-old-space-size=4096 ./node_modules/serverless/bin/serverless deploy --verbose
-#!/usr/bin/env bash
-
 set +e
 
 service=$1

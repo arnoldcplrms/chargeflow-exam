@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { Product } = require('../models/products')
+const Product = require('../models/products')
 
 exports.fetchProducts = async (id) => {
   if (!!id) {

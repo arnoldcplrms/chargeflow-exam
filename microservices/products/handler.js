@@ -2,24 +2,15 @@ const serverless = require('serverless-http')
 const express = require('express')
 const app = express()
 require('dotenv/config')
-const mongoose = require('mongoose')
-const db = mongoose.connection
+
 const bodyParser = require('body-parser')
 const cors = require('cors')
-
-mongoose.connect(process.env.MONGODB_CONNECTION_URL, () => {
-  console.log('Connection successfull')
-})
-
-db.once('open', () => {
-  console.log('Connected to Server')
-}).on('error', (err) => {
-  console.log('CONNECTION FAILED!')
-  console.log(err)
-})
+const { dbConnection } = require('../../utils/dbConnection')
 
 app.use(bodyParser.json())
 app.use(cors())
+
+dbConnection()
 
 app
   .use('/products', require('./routers/productsRouter'))

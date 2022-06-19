@@ -51,7 +51,7 @@ fi
 
 
 
-node  --max-old-space-size=4096 node_modules/serverless/bin/serverless.js offline start --noAuth 
+node  --max-old-space-size=4096 node_modules/serverless/bin/serverless.js offline start --noAuth
 exit
 
 

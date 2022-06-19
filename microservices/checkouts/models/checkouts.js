@@ -15,4 +15,5 @@ const Checkout = new Schema({
   },
 })
 
-exports.Checkout = mongoose.model('Checkout', Checkout)
+module.exports =
+  mongoose.models.Checkout || mongoose.model('Checkout', Checkout)

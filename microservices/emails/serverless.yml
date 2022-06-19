@@ -8,6 +8,10 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: ap-southeast-1
+  environment:
+    ENV_AWS_REGION: ${env:ENV_AWS_REGION}
+    ENV_AWS_ACCESS_KEY_ID: ${env:ENV_AWS_ACCESS_KEY_ID}
+    ENV_AWS_SECRET_ACCESS_KEY: ${env:ENV_AWS_SECRET_ACCESS_KEY}
 
 functions:
   checkoutEmailQueue:
@@ -16,12 +20,12 @@ functions:
       - sqs:
           arn:
             Fn::GetAtt:
-              - EmailQueue
+              - CheckoutEmailQueue
               - Arn
 
 resources:
   Resources:
-    EmailQueue:
+    CheckoutEmailQueue:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "EmailQueue"
+        QueueName: "CheckoutEmailQueue"

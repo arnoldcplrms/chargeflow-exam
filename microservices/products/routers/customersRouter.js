@@ -24,6 +24,7 @@ router.get('/:customerId', async (req, res) => {
   try {
     res.json(await fetchCustomers(req.params.customerId))
   } catch (error) {
+    console.log(error)
     res.status(500).json(error)
   }
 })

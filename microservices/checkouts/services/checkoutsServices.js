@@ -1,7 +1,7 @@
 const { axiosInstance } = require('../../../utils/axiosInstance')
 const { sendSQSMessage } = require('../../../utils/sendSQSMessage')
 
-const { Checkout } = require('../models/checkouts')
+const Checkout = require('../models/checkouts')
 
 const fetchCustomerDetails = async (customerId) => {
   const result = await axiosInstance.get(`/customer/${customerId}`)
@@ -34,8 +34,5 @@ exports.confirmCheckout = async (checkoutId, customerId) => {
     fetchProductDetails(result.productId),
   ])
 
-  await sendSQSMessage(
-    process.env.EMAIL_QUEUE_URL,
-    JSON.stringify({ customer, product }),
-  )
+  await sendSQSMessage(process.env.EMAIL_QUEUE_URL, { customer, product })
 }

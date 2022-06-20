@@ -8,6 +8,13 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: ap-southeast-1
+  environment:
+    MONGODB_CONNECTION_URL: ${env:MONGODB_CONNECTION_URL}
+    EMAIL_QUEUE_URL: ${env:EMAIL_QUEUE_URL}
+    ENV_AWS_REGION: ${env:ENV_AWS_REGION}
+    ENV_AWS_ACCESS_KEY_ID: ${env:ENV_AWS_ACCESS_KEY_ID}
+    ENV_AWS_SECRET_ACCESS_KEY: ${env:ENV_AWS_SECRET_ACCESS_KEY}
+    BASE_URL: ${env:BASE_URL}
 
 functions:
   checkoutsApi:

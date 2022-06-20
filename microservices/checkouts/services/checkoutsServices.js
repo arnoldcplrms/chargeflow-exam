@@ -22,6 +22,15 @@ exports.createCheckout = async (body) => {
   }).save()
 }
 
+exports.fetchCheckouts = async (id) => {
+  if (!!id) {
+    return Checkout.findById(id).exec()
+  }
+  // this should have pagination implementation in real life
+  const result = await Checkout.find().exec()
+  return result
+}
+
 exports.confirmCheckout = async (checkoutId, customerId) => {
   const result = await Checkout.findOneAndUpdate(
     { id: checkoutId, customerId },

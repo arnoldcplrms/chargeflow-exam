@@ -9,6 +9,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
+    "jest": "^28.1.1",
+    "mockingoose": "^2.15.2",
     "mongoose": "^6.3.8",
     "nodemon": "^2.0.16",
     "serverless": "^3.19.0",
